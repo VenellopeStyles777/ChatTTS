@@ -3,11 +3,13 @@
 import ChatTTS
 from IPython.display import Audio
 import scipy
+import torch
+import torch._dynamo
+torch._dynamo.config.suppress_errors = True
 
 chat = ChatTTS.Chat()
 chat.load_models()
-import torch
-std, mean = torch.load('ChatTTS/asset/spk_stat.pt').chunk(2)
+std, mean = torch.load('models/asset/spk_stat.pt').chunk(2)
 rand_spk = torch.randn(768) * std + mean
 
 params_infer_code = {

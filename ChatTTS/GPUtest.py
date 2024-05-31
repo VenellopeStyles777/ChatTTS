@@ -5,3 +5,34 @@ print(torch.cuda.is_available())  # Should print: True
 print(torch.cuda.current_device())  # Should print: 0 (or another GPU ID)
 print(torch.cuda.device_count())  # Should print the number of GPUs available
 print(torch.cuda.get_device_name(0))  # Should print the name of the GPU
+import torch
+
+def main():
+    # Check if CUDA is available
+    if torch.cuda.is_available():
+        print("CUDA is available!")
+        print(f"PyTorch version: {torch.__version__}")
+        
+        # Get the number of GPUs available
+        num_gpus = torch.cuda.device_count()
+        print(f"Number of GPUs available: {num_gpus}")
+        
+        for i in range(num_gpus):
+            # Get the name of the GPU
+            gpu_name = torch.cuda.get_device_name(i)
+            print(f"GPU {i}: {gpu_name}")
+            
+            # Get the CUDA compute capability
+            compute_capability = torch.cuda.get_device_capability(i)
+            print(f"Compute capability of GPU {i}: {compute_capability}")
+            
+            # Get the current memory allocated and cached
+            allocated = torch.cuda.memory_allocated(i) / (1024 ** 3)
+            cached = torch.cuda.memory_reserved(i) / (1024 ** 3)
+            print(f"Memory allocated on GPU {i}: {allocated:.2f} GB")
+            print(f"Memory cached on GPU {i}: {cached:.2f} GB")
+    else:
+        print("CUDA is not available.")
+
+if __name__ == "__main__":
+    main()
