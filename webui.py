@@ -7,7 +7,8 @@ import gradio as gr
 import numpy as np
 
 import ChatTTS
-
+import torch._dynamo
+torch._dynamo.config.suppress_errors = True
 
 def generate_seed():
     new_seed = random.randint(1, 100000000)

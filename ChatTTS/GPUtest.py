@@ -1,13 +1,18 @@
 import torch
 import tensorflow as tf
+print("TensorFlow Version:", tf.__version__)
+print(torch.__version__)  # Should print the version of PyTorch
+print(torch.version.cuda)
 print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
 print(torch.cuda.is_available())  # Should print: True
 print(torch.cuda.current_device())  # Should print: 0 (or another GPU ID)
 print(torch.cuda.device_count())  # Should print the number of GPUs available
 print(torch.cuda.get_device_name(0))  # Should print the name of the GPU
-import torch
-
-def main():
+if torch.cuda.is_available():
+    print("Current CUDA Device: ", torch.cuda.current_device())  # Should print: 0 (or another GPU ID)
+    print("Device Name: ", torch.cuda.get_device_name(torch.cuda.current_device()))
+a = True
+if(a == True):
     # Check if CUDA is available
     if torch.cuda.is_available():
         print("CUDA is available!")
@@ -33,6 +38,4 @@ def main():
             print(f"Memory cached on GPU {i}: {cached:.2f} GB")
     else:
         print("CUDA is not available.")
-
-if __name__ == "__main__":
-    main()
+    a = False
