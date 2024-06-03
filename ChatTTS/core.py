@@ -143,8 +143,8 @@ class Chat:
         if do_text_normalization:
             for i, t in enumerate(text):
                 _lang = detect_language(t) if lang is None else lang
-                #self.init_normalizer(_lang)
-                #text[i] = self.normalizer[_lang](t)
+                self.init_normalizer(_lang)
+                text[i] = self.normalizer[_lang](t)
                 if _lang == 'zh':
                     text[i] = apply_half2full_map(text[i])
             
